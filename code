@@ -1,0 +1,22 @@
+
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import pandas as pd
+df=pd.read_csv(r"C:\Users\DELL\Downloads\indiaCensus.csv")
+#print(df.columns)
+#print(df.info())
+#print(df.index)
+pd.set_option("display.width",None)
+df.style.hide(axis="index")
+df.style.set_caption("Indian census data !!")
+d_name=df['District_name'].isin(["New Delhi ", "Lucknow" , "Jaipur"])
+print(d_name)
+print(df.head())
+print("total number of population -",df.groupby("State_name")["Population"].sum())
+religion=["Hindus",  "Muslims", "Christians","Sikhs", "Buddhists","Jains"]
+print(df.groupby("State_name")[religion].sum())
+print("male workers in maharastra state:",df[df["State_name"]=="MAHARASHTRA"]["Male_Workers"].sum())
+df.set_index(keys="District_code", inplace=True)
+df.add_suffix("ind")
